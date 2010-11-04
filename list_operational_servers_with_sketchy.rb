@@ -25,17 +25,14 @@ output = api.send("servers")
 xml = Crack::XML.parse(output)
 puts "Operational servers:"
 xml["servers"].each { |svr|
-
-        server_id = svr["href"].match(/[0-9]+$/).to_s.to_i
-
-        if (svr["state"] == "operational")
-                puts "Server ID#(#{server_id}) - (#{svr["nickname"]})"
-                if (output = api.send("servers/#{server_id}/monitoring"))
-                        xmlmonitor = Crack::XML.parse(output)
-                        if (xmlmonitor["monitors"]["monitor"][0]["href"])
-                        puts " Sketchy used:"+xmlmonitor["monitors"]["monitor"][0]["href"].match(/sketchy[0-9]+-[0-9]+/).to_s
-                        end
-                end
-                #pp xmlmonitor
-        end
+  server_id = svr["href"].match(/[0-9]+$/).to_s.to_i
+  if (svr["state"] == "operational")
+    puts "Server ID#(#{server_id}) - (#{svr["nickname"]})"
+    if (output = api.send("servers/#{server_id}/monitoring"))
+      xmlmonitor = Crack::XML.parse(output)
+      if (xmlmonitor["monitors"]["monitor"][0]["href"])
+        puts " Sketchy used:"+xmlmonitor["monitors"]["monitor"][0]["href"].match(/sketchy[0-9]+-[0-9]+/).to_s
+      end
+    end
+  end
 }
