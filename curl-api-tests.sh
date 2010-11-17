@@ -33,5 +33,11 @@ curl -c mySavedCookies -u "$USER:$PASSWORD" https://my.rightscale.com/api/acct/7
 #-d "server[ec2_availability_zone]=us-west-1d" \
 #"https://my.rightscale.com/api/acct/7954/servers"
 
-curl -b mySavedCookies -H 'X_API_VERSION:1.0' -d "cloud_id=2" -X GET "https://my.rightscale.com/api/acct/7954/ec2_security_groups"
-# | grep https://my.rightscale.com/api/acct/7954/ec2_security_groups | cut -f 2 -d '>' | cut -f 1 -d '<' 
+# This call will list the ec2 security groups for cloud 2 (eu) 
+#curl -b mySavedCookies -H 'X_API_VERSION:1.0' -d "cloud_id=2" -X GET "https://my.rightscale.com/api/acct/7954/ec2_security_groups"
+
+# This request will update an input for a RightScript on a deployment.
+#curl -b mySavedCookies -H 'X-API-VERSION:1.0' -X PUT -d 'deployment[parameters][FIREFOX_HOMEPAGE]=text:www.test.com' "https://my.rightscale.com/api/acct/7954/deployments/53513"
+
+# This one updates an input for a chef recipe
+#curl -b mySavedCookies -H 'X-API-VERSION:1.0' -X PUT -d 'deployment[parameters][s3/bucket]=text:myBucket' "https://my.rightscale.com/api/acct/7954/deployments/53513"
