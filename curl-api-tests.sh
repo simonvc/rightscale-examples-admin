@@ -1,26 +1,31 @@
-#! /bin/bash
+#! /bin/bash -ex
 #
 # This file contains examples of using curl to access the RightScale API
 # It relies on a file called user-details.sh to pull in the credentials
 
 # This file should setup variables containing the username and password
 source ./user-details.sh
+acctid="7954"
 
 #
 # Examples
 #
 
 # This line sets up the login cookies
-curl -c mySavedCookies -u "$USER:$PASSWORD" https://my.rightscale.com/api/acct/7954/login?api_version=1.0
+curl -w "Result: %{response_code}\n" -c mySavedCookies -u "$USER:$PASSWORD" "https://my.rightscale.com/api/acct/$acctid/login?api_version=1.0"
+#curl -w "Result: %{response_code}\n" -c mySavedCookies -u "$USER:$PASSWORD" "https://my.rightscale.com/api/acct/9236/login?api_version=1.0"
 
 # This call gets all operational servers
 #curl -b mySavedCookies -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/7954/servers.xml?state=operational"
+
+#Zynga test
+# time curl -w "Result: %{response_code}\n" -v -b mySavedCookies -H X-API-VERSION:1.0 -X GET https://my.rightscale.com/api/acct/9236/deployments/55859?server_settings=true
 
 # This call gets the details of a specific instance
 #curl -b mySavedCookies -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/7954/ec2_instances/5239075
 
 # This call lists all instances (not sure this works)
-# curl -b mySavedCookies -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/7954/ec2_instances"
+#curl -b mySavedCookies  -X 'GET' -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/7954/ec2_instances"
 
 # This line creates a new server
 #curl -b mySavedCookies -H 'X-API-VERSION:1.0' -v -X POST \
@@ -41,3 +46,47 @@ curl -c mySavedCookies -u "$USER:$PASSWORD" https://my.rightscale.com/api/acct/7
 
 # This one updates an input for a chef recipe
 #curl -b mySavedCookies -H 'X-API-VERSION:1.0' -X PUT -d 'deployment[parameters][s3/bucket]=text:myBucket' "https://my.rightscale.com/api/acct/7954/deployments/53513"
+
+#curl -b mySavedCookies -H 'X-API-VERSION:1.0' -X GET https://my.rightscale.com/api/acct/7954/servers/836587/current
+
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -H 'X-API-VERSION: 1.0' -d 'ec2_security_group[from_port]=24' -d 'ec2_security_group[to_port]=25' -d 'ec2_security_group[cidr_ips]=10.1.1.0/0' -d 'ec2_security_group[protocol]=udp' -X PUT https://my.rightscale.com/api/acct/7954/ec2_security_groups/182266
+
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -H 'X-API-VERSION: 1.0' -d 'cloud_id=2' -d 'ec2_security_group[aws_description]=gibber mcflibber' -d 'ec2_security_group[aws_group_name]=gibber mcflibber' -X 'POST' https://my.rightscale.com/api/acct/7954/ec2_security_groups
+
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -H 'X-API-VERSION:1.0' -X GET "https://my.rightscale.com/api/acct/$acctid/servers/868844/current"
+# curl -w "Result: %{response_code}\n" -b mySavedCookies -H 'X-API-VERSION:1.0' -X GET "https://my.rightscale.com/api/acct/$acctid/servers/876115"
+
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -H 'X-API-VERSION:1.0' -X GET "https://my.rightscale.com/api/$acctid/deployments/66600/show_servers_script"
+
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -H 'X-API-VERSION:1.0' -X GET "https://my.rightscale.com/api/acct/$acctid/deployments"
+
+# curl -w "Result: %{response_code}\n" -b mySavedCookies -H 'X-API-VERSION:1.0' -X GET "https://my.rightscale.com/api/acct/$acctid/servers?filter=state=operational"
+# echo
+# echo "========================================================"
+# echo
+# echo " Array"
+# echo
+# echo "========================================================"
+# echo
+# curl -w "Result: %{response_code}\n" -b mySavedCookies -H 'X-API-VERSION:1.0' -X GET "https://my.rightscale.com/api/acct/$acctid/server_arrays/10836/instances"
+
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -X POST -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/7954/ec2_instances/7108987/stop"
+
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/$acctid/ec2_elastic_ips"
+# curl -w "Result: %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/$acctid/servers/890270"
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/$acctid/servers/836587"
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/$acctid/ec2_elastic_ips/54759"
+
+#curl -w "Result: %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/$acctid/servers/805417/get_sketchy_data?start=-400&end=0&resolution=1&plugin_name=cp-0&plugin_type=cpu-idle"
+
+#curl -w "Result %{response_code}\n" -b mySavedCookies -X PUT -H 'X-API-VERSION:1.0' -d 'server_array[active]=true' "https://my.rightscale.com/api/acct/$acctid/server_arrays/10461"
+#curl -w "Result %{response_code}\n" -b mySavedCookies -X PUT -H 'X-API-VERSION:1.0' -d 'server_array[active]=false' "https://my.rightscale.com/api/acct/$acctid/server_arrays/10461"
+
+#curl -w "Result %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/9236/deployments"
+
+#curl -w "Result %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/$acctid/servers/995616"
+#curl -w "Result %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' "https://my.rightscale.com/api/acct/$acctid/servers/995616/settings"
+#curl -w "Result %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' -d 'cloud_id=1' "https://my.rightscale.com/api/acct/$acctid/ec2_ebs_volumes"
+#curl -w "Result %{response_code}\n" -b mySavedCookies -X GET -H 'X-API-VERSION:1.0' -d 'cloud_id=2' "https://my.rightscale.com/api/acct/$acctid/ec2_ebs_volumes"
+
+curl -w "Result  %{response_code}\n" -b mySavedCookies -X PUT -H 'X-API-VERSION:1.0' -d 'server[pricing]=spot' -d 'server[max_spot_price]=0.1' "https://my.rightscale.com/api/acct/$acctid/servers/1044856"

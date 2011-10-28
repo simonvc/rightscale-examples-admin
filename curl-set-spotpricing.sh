@@ -5,7 +5,7 @@
 
 # This file should setup variables containing the username and password
 source ./user-details.sh
-acctid="7954"
+acctid="xxxx"
 
 #
 # Examples
