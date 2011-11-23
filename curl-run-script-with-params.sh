@@ -3,9 +3,9 @@
 # This is a template for use testing API functions.
 # It relies on a file called user-details.sh to pull in the credentials. This file should contain similar to the following:
 #
-#USER="jonathan.dade@rightscale.com"
-#PASSWORD="MilRecHer6"
-#ACCT="7954"
+#USER="user.name@company.com"
+#PASSWORD="MySecurePassword"
+#ACCT="0000"
 #
 
 # This file should setup variables containing the username and password
