@@ -1,0 +1,13 @@
+
+Contains sample collectd plugins
+
+collectdplugin.rb
+
+
+df_in_percents.conf
+df_in_percents.sh
+	Implements a free space / used space plugin for collectd.
+
+JDcollectdfilemon.rb
+	Implements a modified version of outputting filesystem statistics
+
