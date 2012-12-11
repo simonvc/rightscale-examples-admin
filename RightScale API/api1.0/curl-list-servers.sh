@@ -9,9 +9,9 @@
 #
 
 # This file should setup variables containing the username and password
-source ./user-details.sh
+source ../user-details.sh
 
-ACCT='9236'
+ACCT='61340'
 # This line sets up the login cookies
 curl -c mySavedCookies -u "$USER:$PASSWORD" https://my.rightscale.com/api/acct/$ACCT/login?api_version=1.0
 
