@@ -13,10 +13,10 @@ source ../user-details.sh
 BASEURL="https://my.rightscale.com"
 
 # Get a list of servers
-#curl -v -b "mySavedCookies-$ACCT" -X "GET" -H "X-API-VERSION:1.5" -H "Accept: application/xml" "$BASEURL/api/servers"
+#curl -L -v -b "mySavedCookies-$ACCT" -X "GET" -H "X-API-VERSION:1.5" -H "Accept: application/xml" "$BASEURL/api/servers"
 
 # Create a new server
-curl -v -b "mySavedCookies-$ACCT" -X "POST" -H "X-API-VERSION:1.5" -H "Accept: application/xml" \
+curl -L -v -b "mySavedCookies-$ACCT" -X "POST" -H "X-API-VERSION:1.5" -H "Accept: application/xml" \
   -d "server[deployment_href]=/api/deployments/109926" \
   -d "server[instance][cloud_href]=/api/clouds/232" \
   -d "server[instance][server_template_href]=/api/server_templates/212263001" \

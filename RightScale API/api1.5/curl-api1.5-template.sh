@@ -13,4 +13,4 @@ source ../user-details.sh
 BASEURL="https://my.rightscale.com"
 
 # Get a list of servers
-curl -v -b "mySavedCookies-$ACCT" -X "GET" -H "X-API-VERSION:1.5" -H "Accept: application/xml" "$BASEURL/api/servers"
+curl -L -v -b "mySavedCookies-$ACCT" -X "GET" -H "X-API-VERSION:1.5" -H "Accept: application/xml" "$BASEURL/api/servers"
